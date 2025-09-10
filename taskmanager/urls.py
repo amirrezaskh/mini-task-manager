@@ -31,6 +31,6 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls')),  
     # Token based login for authentication
-    path('api/auth/login/', obtain_auth_token, name='api_token_auth'),
+    path('api/auth/signin/', obtain_auth_token, name='api_token_auth'),
     path('api/auth/signup/', SignupView.as_view(), name='signup')
 ]
