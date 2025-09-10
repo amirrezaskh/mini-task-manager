@@ -5,7 +5,6 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Button from "@mui/material/Button";
 import IconButton from "@mui/material/IconButton";
-import Container from "@mui/material/Container";
 import Divider from "@mui/material/Divider";
 import MenuItem from "@mui/material/MenuItem";
 import Drawer from "@mui/material/Drawer";
@@ -40,7 +39,7 @@ export default function Navbar() {
 
   return (
     <AppBar
-      position="fixed"
+      position="absolute"
       enableColorOnDark
       sx={{
         boxShadow: 0,
@@ -49,7 +48,16 @@ export default function Navbar() {
         mt: "calc(var(--template-frame-height, 0px) + 28px)",
       }}
     >
-      <Container maxWidth="lg">
+      <Box
+        sx={{
+          width: "100%",
+          mx: "auto", // center
+          px: 2,      // padding like Container
+          maxWidth: {
+            xl: "lg", // up to md → maxWidth = md
+            lg: "md", // from lg up → maxWidth = lg
+          },
+      }}>
         <StyledToolbar variant="dense" disableGutters>
           <Box
             sx={{ flexGrow: 1, display: "flex", alignItems: "center", px: 0 }}
@@ -78,12 +86,12 @@ export default function Navbar() {
             <Box sx={{ display: { xs: "none", md: "flex", } }}>
               <Button
                 component={NavLink}
-                to="/tasks"
+                to="/dashboard"
                 variant="text"
                 color="info"
                 size="small"
               >
-                Tasks
+                Dashboard
               </Button>
               <Button
                 component={NavLink}
@@ -196,7 +204,7 @@ export default function Navbar() {
             </Drawer>
           </Box>
         </StyledToolbar>
-      </Container>
+      </Box>
     </AppBar>
   );
 }

@@ -1,14 +1,4 @@
-import {
-  Box,
-  Button,
-  CardContent,
-  CardHeader,
-  Chip,
-  Divider,
-  Stack,
-  styled,
-  Typography,
-} from "@mui/material";
+import { Box, Button, CardContent, CardHeader, Chip, Divider, Stack, styled, Typography } from "@mui/material";
 import TaskIcon from "@mui/icons-material/Task";
 import MuiCard from "@mui/material/Card";
 import { AccessTime } from "@mui/icons-material";
@@ -24,14 +14,7 @@ type Props = {
 export default function TaskCard({ task, onTaskDeleted }: Props) {
   const [status, setStatus] = useState<{
     label: string;
-    color:
-      | "success"
-      | "warning"
-      | "default"
-      | "primary"
-      | "secondary"
-      | "error"
-      | "info";
+    color: "success" | "warning";
   }>({
     label: task.is_completed ? "Completed" : "Not completed",
     color: task.is_completed ? "success" : "warning",
@@ -86,7 +69,7 @@ export default function TaskCard({ task, onTaskDeleted }: Props) {
   const Container = styled(Stack)(({ theme }) => ({
     padding: theme.spacing(2),
     [theme.breakpoints.up("sm")]: {
-      padding: theme.spacing(2),
+      padding: theme.spacing(1),
     },
     "&::before": {
       content: '""',
@@ -108,7 +91,10 @@ export default function TaskCard({ task, onTaskDeleted }: Props) {
     display: "flex",
     flexDirection: "column",
     padding: theme.spacing(3),
-    gap: theme.spacing(1),
+    gap: theme.spacing(2),
+    borderRadius: theme.spacing(3),
+    position: "relative",
+    zIndex: 1,
     boxShadow:
       "hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px",
     ...theme.applyStyles("dark", {
@@ -118,8 +104,8 @@ export default function TaskCard({ task, onTaskDeleted }: Props) {
   }));
 
   return (
-    <Container>
-      <Card elevation={3} sx={{ borderRadius: 3 }}>
+    <Container direction="column" justifyContent="space-between">
+      <Card variant="outlined">
         <Box display="flex" alignItems="center" justifyContent="space-between">
           <CardHeader
             avatar={<TaskIcon sx={{ height: 50, width: 50 }} />}
