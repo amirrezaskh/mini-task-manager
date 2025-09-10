@@ -1,10 +1,49 @@
 import { Box, Button, FormControl, FormLabel, Stack, styled, TextField, Typography } from "@mui/material";
 import MuiCard from '@mui/material/Card';
+import { useNavigate } from "react-router";
+const BASE_URL = import.meta.env.VITE_BACKEND_URL;
 
 export default function SignUpPage() {
-  
+  const navigate = useNavigate();
 
+  async function handleSubmit(e: { preventDefault: () => void; }) {
+    e.preventDefault();
 
+    const username = document.getElementById('username') as HTMLInputElement;
+    const email = document.getElementById('email') as HTMLInputElement;
+    const password = document.getElementById('password') as HTMLInputElement;
+
+    const requestData = {
+      email: email.value,
+      username: username.value,
+      password: password.value
+    };
+
+    console.log("Sending signup request with data:", requestData);
+    console.log("Request URL:", `${BASE_URL}/api/auth/signup/`);
+
+    try {
+      const response = await fetch(`${BASE_URL}/api/auth/signup/`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(requestData),
+      });
+
+      console.log("Response status:", response.status);
+      console.log("Response headers:", response.headers);
+
+      const responseData = await response.json();
+      console.log("Response data:", responseData);
+
+      if (response.status === 201) {
+        console.log("Signup successful, navigating to signin");
+        navigate("/signin");
+      }
+    } catch (error) {
+      console.error("Network or parsing error:", error);
+      alert(`Error: ${error}`);
+    }
+  }
 
   const Card = styled(MuiCard)(({ theme }) => ({
     display: "flex",
@@ -58,7 +97,7 @@ export default function SignUpPage() {
           </Typography>
           <Box
             component="form"
-            // onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
             sx={{ display: "flex", flexDirection: "column", gap: 2 }}
           >
             <FormControl>
@@ -70,9 +109,6 @@ export default function SignUpPage() {
                 fullWidth
                 id="username"
                 placeholder="You"
-                // error={nameError}
-                // helperText={nameErrorMessage}
-                // color={nameError ? "error" : "primary"}
               />
             </FormControl>
             <FormControl>
@@ -85,9 +121,6 @@ export default function SignUpPage() {
                 name="email"
                 autoComplete="email"
                 variant="outlined"
-                // error={emailError}
-                // helperText={emailErrorMessage}
-                // color={passwordError ? "error" : "primary"}
               />
             </FormControl>
             <FormControl>
@@ -101,16 +134,12 @@ export default function SignUpPage() {
                 id="password"
                 autoComplete="new-password"
                 variant="outlined"
-                // error={passwordError}
-                // helperText={passwordErrorMessage}
-                // color={passwordError ? "error" : "primary"}
               />
             </FormControl>
             <Button
               type="submit"
               fullWidth
               variant="contained"
-              // onClick={validateInputs}
             >
               Sign up
             </Button>

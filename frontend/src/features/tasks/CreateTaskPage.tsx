@@ -8,7 +8,7 @@ export default function CreateTaskPage() {
 
   useEffect(() => {
       if (!loggedIn) {
-          navigate("/signin");
+        navigate("/signin");
       }
   }, [loggedIn, navigate])
 

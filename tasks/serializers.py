@@ -5,19 +5,19 @@ from django.contrib.auth.models import User
 
 
 class TaskSerializer(ModelSerializer):
+    owner = serializers.ReadOnlyField(source='owner.username')
+    
     class Meta:
         model = Task
-        owner = serializers.ReadOnlyField(source='owner.username')
-        fields = ["title", "description", "due_date", "completed", "owner"]
+        fields = ["id", "title", "description", "due_date", "is_completed", "owner"]
 
 
 class UserSerializer(serializers.ModelSerializer):
-    tasks = serializers.PrimaryKeyRelatedField(many=True, queryset=Task.objects.all())
     password = serializers.CharField(write_only=True)
 
     class Meta:
         model = User
-        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password', 'tasks']
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'password']
 
     def create(self, validated_data):
         password = validated_data.pop('password')

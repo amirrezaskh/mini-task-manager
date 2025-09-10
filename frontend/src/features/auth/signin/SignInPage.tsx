@@ -16,20 +16,28 @@ export default function SignInPage() {
     const username = document.getElementById('username') as HTMLInputElement;
     const password = document.getElementById('password') as HTMLInputElement;
 
-    const response = await fetch(`${BASE_URL}/api/auth/signin/`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          username: username.value,
-          password: password.value
-        }),
-    });
-    if (response.status !== 200) {
-        togglePasswordError();
-    } else {
-        const data = await response.json();
-        sessionStorage.setItem("userInfo", JSON.stringify(data));
-        navigate("/dashboard");
+    try {
+      const response = await fetch(`${BASE_URL}/api/auth/signin/`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            username: username.value,
+            password: password.value
+          }),
+      });
+
+      if (response.status !== 200) {
+          console.error("Login failed:", response.status, response.statusText);
+          togglePasswordError();
+      } else {
+          const data = await response.json();
+          console.log("Login successful, received data:", data);
+          sessionStorage.setItem("userInfo", JSON.stringify(data));
+          navigate("/dashboard");
+      }
+    } catch (error) {
+      console.error("Login error:", error);
+      togglePasswordError();
     }
   }
 
