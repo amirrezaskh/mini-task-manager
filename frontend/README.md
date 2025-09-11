@@ -1,69 +1,44 @@
-# React + TypeScript + Vite
+# Frontend Documentation
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The frontend is a modern React application built with TypeScript, Material-UI, and Vite. It provides a responsive, user-friendly interface for the Mini Task Manager with clean architecture and reusable components.
 
-Currently, two official plugins are available:
+## Technology Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Core Technologies
+- **React 19.1.1**: Latest React with modern hooks and features
+- **TypeScript**: Type safety and enhanced developer experience
+- **Vite**: Fast build tool and development server
+- **Material-UI v7**: Complete component library with theming
 
-## Expanding the ESLint configuration
+### Key Dependencies
+- **React Router v7**: Client-side routing and navigation
+- **Styled Components**: CSS-in-JS for custom styling
+- **Day.js**: Lightweight date manipulation library
+- **MUI Date Pickers**: Advanced date/time selection components
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Project Architecture
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Feature-Based Structure
+The frontend follows a feature-based architecture that promotes modularity and scalability:
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```
+src/
+├── app/                    # Application shell
+│   ├── layout/            # Navigation and layout components
+│   └── router/            # Routing configuration
+├── features/              # Feature-specific modules
+│   ├── auth/              # Authentication features
+│   ├── tasks/             # Task management features
+│   └── about/             # About page
+├── theme/                 # Material-UI theme configuration
+├── lib/                   # Shared utilities
+└── types/                 # TypeScript type definitions
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Design Principles
+- **Component Composition**: Small, reusable components
+- **Type Safety**: Comprehensive TypeScript usage
+- **Responsive Design**: Mobile-first approach
+- **Theme Consistency**: Centralized design system
+- **Performance**: Optimized bundle size and loading
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
