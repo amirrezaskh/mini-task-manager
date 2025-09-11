@@ -27,6 +27,7 @@ export default function SignInPage() {
       });
 
       if (response.status !== 200) {
+          alert("Incorrect password or username.")
           console.error("Login failed:", response.status, response.statusText);
           togglePasswordError();
       } else {

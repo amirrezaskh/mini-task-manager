@@ -37,6 +37,7 @@ export default function SignUpPage() {
 
       if (response.status === 201) {
         console.log("Signup successful, navigating to signin");
+        alert("Sign up was successful. Please log in now.")
         navigate("/signin");
       }
     } catch (error) {
