@@ -27,8 +27,8 @@ export default function App() {
           <Box
             sx={{
               maxWidth: {
-                xl: "xl", // up to md → maxWidth = md
-                lg: "md", // from lg up → maxWidth = lg
+                xl: "lg",
+                lg: "md",
               },
               mx: 'auto',
               pt: { xs: 14, sm: 20 },

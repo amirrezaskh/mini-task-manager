@@ -51,11 +51,11 @@ export default function Navbar() {
       <Box
         sx={{
           width: "100%",
-          mx: "auto", // center
-          px: 2,      // padding like Container
+          mx: "auto",
+          px: 2,
           maxWidth: {
-            xl: "lg", // up to md → maxWidth = md
-            lg: "md", // from lg up → maxWidth = lg
+            xl: "lg",
+            lg: "md",
           },
       }}>
         <StyledToolbar variant="dense" disableGutters>
