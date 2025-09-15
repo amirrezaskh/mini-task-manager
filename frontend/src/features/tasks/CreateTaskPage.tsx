@@ -63,7 +63,7 @@ export default function TaskForm() {
   async function handleSubmit(e: { preventDefault: () => void; }) {
     e.preventDefault();
 
-    const formattedDueDate = dueDate ? dueDate.format('YYYY-MM-DD HH:mm:ss') : null;
+    const formattedDueDate = dueDate ? dueDate.format('YYYY-MM-DD HH:mm:ssZ') : null;
 
     const requestData = {
       title: task.title,
